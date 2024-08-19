@@ -86,9 +86,75 @@ GRANT ALL PRIVILEGES ON DATABASE airflow_db TO airflow_user;
 GRANT ALL ON SCHEMA public TO airflow_user;
 ```
 
-2. Once the `airflow_db` and `airflow_user` with it's added priviliges have beed created, everything is ready to switch the default SQLite database to the hosted database. Get the connection string from the **Overview** page on the database cluster.
+2. Once the `airflow_db` and `airflow_user` are created and the user has its privileges assigned, everything is ready to switch the default SQLite database to the hosted database. Get the connection string from the **Overview** page on the database cluster. The `airflow_db` and the `airflow_user` should be specified in the string.
 
+```bash
+# Example:
+postgresql+psycopg2://airflow_user:<PASSWORD>@my-database-cluster-do-user-123456789-0.h.db.ondigitalocean.com:25060/airflow_db?sslmode=require 
+```
 
+3. In the Ubuntu machine, change into the `airflow/` directory and then edit the `airflow.cfg` file to update the `sql_alchemy_conn` variable with the PostgreSQL connection string.
 
+```bash
+nano airflow.cfg
+```
 
+4. With `nano`, you can search for the variable with `CTRL + W` and search for the variable name. Hit enter and the cursor will be placed in front of the variable.  Once the variable is found, replace the default SQLite connection with the PostgreSQL connection string. Below is an example of what the variable looks like in the `airflow.cfg` file.
 
+```toml
+# The SqlAlchemy connection string to the metadata database.
+# SqlAlchemy supports many different database engines.
+# More information here:
+# http://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#database-uri
+#
+# Variable: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+#
+sql_alchemy_conn = sqlite://....
+```
+
+5. While still in the `airflow.cfg` file, edit the `executor` variable from `SequentialExecutor` to `LocalExecutor`. Read more about Executors in [Airflow's documentation](https://airflow.apache.org/docs/apache-airflow/2.7.3/core-concepts/executor/index.html).
+
+```toml
+# The executor class that airflow should use. Choices include
+# ``SequentialExecutor``, ``LocalExecutor``, ``CeleryExecutor``, ``DaskExecutor``,
+# ``KubernetesExecutor``, ``CeleryKubernetesExecutor``, ``LocalKubernetesExecutor`` or the
+# full import path to the class when using a custom executor.
+#
+# Variable: AIRFLOW__CORE__EXECUTOR
+#
+executor = LocalExecutor
+```
+
+6. Also while in the `airflow.cfg` file, edit the `load_examples` variable to remove the example dags by setting it to `False`.
+
+```toml
+# Whether to load the DAG examples that ship with Airflow. It's good to
+# get started, but you probably want to set this to ``False`` in a production
+# environment
+#
+# Variable: AIRFLOW__CORE__LOAD_EXAMPLES
+#
+load_examples = False
+```
+
+7. Then, run the `airflow db migrate` command to initialize the new connection.
+8. Create a user for logging into the Airflow UI. Any name, password, and email will work. In keeping with the theme of the project, the admin user is based off of the franchise.
+
+```bash
+airflow users create \
+    --username admin \
+    --firstname Ask \
+    --lastname Ketchum \
+    --password airflow \
+    --role Admin \
+    --email spiderman@superhero.org
+```
+
+8. Once the user is created, run the web server.
+
+```bash
+airflow webserver --port 8080
+```
+
+9. In a web browser, visit `localhost:8080` and you will be taken the sign-in page for Airflow.
+10. Login with the user's username and password created in step 8 and you'll see Airflow's dashboard.
