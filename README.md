@@ -1,7 +1,7 @@
 ---
 icon: hand-wave
-cover: https://gitbookio.github.io/onboarding-template-images/header.png
-coverY: 0
+cover: .gitbook/assets/data_pipeline_background_cover.png
+coverY: 102
 layout:
   cover:
     visible: true
