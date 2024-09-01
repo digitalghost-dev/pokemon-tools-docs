@@ -4,7 +4,7 @@ description: >-
   Ubuntu Linux machine.
 ---
 
-# Local Install
+# Virtual Machine Install
 
 This project uses Parallels for virtual machine usage but other providors such as VirtualBox or VMWare will suffice.
 
@@ -18,7 +18,7 @@ _There are a few installs needed before setting up Airflow._
 
 ### **Python**
 
-* Ubuntu should come installed with Python. Check this by opening up the terminal and running `python --version` and verify that Python is installed. This project uses Python `v3.10.12`
+* Ubuntu should come installed with Python. Check this by opening up the terminal and running `python --version` and verify that Python is installed. This project uses Python `v3.12.0`
 * If Python is not installed, visit the [downloads](https://www.python.org/downloads/) page on python.org.
 * Once Python is installed, run `python3 --version` to ensure it's installed.
 
@@ -28,7 +28,7 @@ _There are a few installs needed before setting up Airflow._
 
 ### **virtualenv**
 
-* Run `sudo apt install python-3.10-venv` to install the `virtualenv` package.
+* Run `sudo apt install python-3.12-venv` to install the `virtualenv` package.
 
 ***
 
@@ -143,7 +143,7 @@ load_examples = False
 ```bash
 airflow users create \
     --username admin \
-    --firstname Ask \
+    --firstname Ash \
     --lastname Ketchum \
     --password airflow \
     --role Admin \

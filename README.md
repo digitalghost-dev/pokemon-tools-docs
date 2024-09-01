@@ -1,4 +1,5 @@
 ---
+icon: hand-wave
 cover: https://gitbookio.github.io/onboarding-template-images/header.png
 coverY: 0
 layout:
@@ -19,10 +20,23 @@ layout:
 
 # Welcome
 
-Welcome to the GitBook Starter Template! Here you'll get an overview of all the amazing features GitBook offers to help you build beautiful, interactive documentation.
+Welcome to the documentation of my Pokémon Data Engineering project.
 
-You'll see some of the best parts of GitBook in action — and find help on how you can turn this template into your own.
+This documentation will list all of the instructions taken to build this project from scratch. Since cloud services and different software are used, **there are costs** associated with running this project.
 
-### Jump right in
+Also, specific operating systems and software were used to build this project so different steps may need to be taken.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Getting Started</strong></td><td>Create your first site</td><td><a href=".gitbook/assets/1.png">1.png</a></td><td></td><td><a href="broken-reference">Broken link</a></td></tr><tr><td><strong>Basics</strong></td><td>Learn the basics of GitBook</td><td><a href=".gitbook/assets/2.png">2.png</a></td><td></td><td><a href="broken-reference">Broken link</a></td></tr><tr><td><strong>Publish your docs</strong></td><td>Share your docs online</td><td><a href=".gitbook/assets/3.png">3.png</a></td><td></td><td><a href="broken-reference">Broken link</a></td></tr></tbody></table>
+***
+
+## Tools & Services Used
+
+* **OS:**&#x20;
+  * local: macOS
+  * virtual machine: Ubuntu
+* **Cloud Services:** Digital Ocean
+  * Database
+  * Container Registry
+  * Droplets (virtual machines)
+  * Spaces (object storage)
+* **IDE**
+  * PyCharm
